@@ -34,6 +34,9 @@ class TestCase(unittest.TestCase):
             check_ast = ast.split('.')
             if len(check_ast) == 1:
                 assert_result = result[ast]
+            elif len(check_ast) == 2:
+                key, subkey = check_ast[0], check_ast[1]
+                assert_result = result[key][subkey]
             elif len(check_ast) == 3:
                 key, num, subkey = check_ast[0], check_ast[1], check_ast[2]
                 assert_result = result[key][int(num)][subkey]
