@@ -9,6 +9,7 @@
 
 import os
 import time
+import datetime
 import unittest
 import HTMLTestRunner
 from public.sendemail import *
@@ -25,13 +26,16 @@ def interface():
     runner = HTMLTestRunner.HTMLTestRunner(stream=fp,
                                            title=u'接口自动化测试报告',
                                            description=u'demo项目自动化测试情况:')
-    # start_time = datetime.datetime.now()
+    start_time = datetime.datetime.now()
+    print('------ 准备执行，开始时间：%s ------\n' % start_time)
     file = os.path.join(basedir, 'testcase')
     suite = unittest.defaultTestLoader.discover(file, pattern='*.py')
     runner.run(suite)
     fp.close()
-    # end_time = datetime.datetime.now()
-    # duration = end_time - start_time
+    end_time = datetime.datetime.now()
+    print('\n------ 执行完成，结束时间：%s ------' % end_time)
+    duration = end_time - start_time
+    print('持续时间：%s\n' % duration)
     if file_name and base_name:
         send_email(file_name, base_name)
 

@@ -8,6 +8,10 @@ just for test
 
 import requests
 import json
+from public.log import Logger
+import unittest
+
+logger = Logger()
 
 # url = 'http://api.adf.ly/api.php'
 # init_params = 'key=youkeyid&youuid=uid&advert_type=int&domain=adf.ly&url=http://somewebsite.com'
@@ -45,6 +49,7 @@ def request(url, method, data=None, header=None):
             response = requests.post(url, data=data, headers=header)
             result = json.loads(response.content)
             result['StatusCode'] = response.status_code
+            # logger.info(result)
         except Exception as e:
             code_dict['StatusCode'] = 1000
             code_dict['Exception'] = e
@@ -59,4 +64,7 @@ re_3 = request(url='http://www.kuaidi100.com/autonumber/autoComNum?resultv2=1&te
                method='post',data=data,header=header)
 # print(re)
 # print(re_2)
-print(re_3)
+# logger.info(re_3)
+
+
+

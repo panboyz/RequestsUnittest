@@ -13,6 +13,7 @@ from public.log import Logger
 from public.getconfig import ReadConfig
 
 cf = ReadConfig()
+log = Logger()
 
 
 basedir = os.path.dirname(os.path.dirname(__file__))
@@ -22,16 +23,16 @@ sheet_default = get_sheet(0)
 
 
 def read_excel_data(sheet_num, row_num, col_num):
-    basedir = 'C:/zhoubaoyu/'
+    basedir = os.path.dirname(os.path.dirname(__file__))
     xlsxfiledir = os.path.join(basedir, 'testdata/', 'case.xlsx')
     if not os.path.exists(xlsxfiledir):
-        print('%s 目录或文件不存在，准备新建' % xlsxfiledir)
+        log.info('%s 目录或文件不存在，准备新建' % xlsxfiledir)
         try:
             fobj = open(xlsxfiledir, 'w')
             fobj.close()
-            print('case.xlsx新建成功')
+            log.info('case.xlsx新建成功')
         except Exception as e:
-            print('异常, %s' % e)
+            log.error('异常, %s' % e)
     else:
         sheet = workbook.get_sheet(sheet_num)
         datarow = sheet.row(row_num)[col_num].value
@@ -54,7 +55,7 @@ def get_excel_data(param):
 
             return caseurl,casemethod,caseheader,casedata,caseassert,caseexcept
         else:
-            print('参数%s有误' % param)
+            log.error('参数%s有误' % param)
     else:
         sum_data_list = list()
         single_data_dict = dict()
