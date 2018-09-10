@@ -28,7 +28,7 @@ class TestCase(unittest.TestCase):
         global assert_result
         url, method, header, data, ast, exc = data['url'], data['method'], data['header'], \
                                               data['data'], data['assert'], data['except']
-        result = request(url, method, data=data)
+        result = request(url, method, data=data, header=header)
         if 'Exception' not in result:
             logging.info('请求成功，地址为%s，参数为%s，方式为%s，返回结果为%s' % (url, data, method, result))
             check_ast = ast.split('.')

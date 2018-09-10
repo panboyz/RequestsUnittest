@@ -26,7 +26,7 @@ def request(url, method, data=None, header=None):
         else:
             params = None
         try:
-            response = requests.get(url, params=params, headers=header, timeout=3)
+            response = requests.get(url, params=params, headers=eval(header), timeout=3)
             result = response.content
             try:
                 result = json.loads(result)
@@ -42,7 +42,7 @@ def request(url, method, data=None, header=None):
         return result
     if method == 'post' or method == 'POST':
         try:
-            response = requests.post(url, data=data, headers=header, timeout=3)
+            response = requests.post(url, data=data, headers=eval(header), timeout=3)
             result = json.loads(response.content)
             result['StatusCode'] = response.status_code
         except Exception as e:
